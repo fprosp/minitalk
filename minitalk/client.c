@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_client.c                                      :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 17:24:50 by fprosper          #+#    #+#             */
-/*   Updated: 2023/02/27 19:07:11 by fprosper         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:50:35 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_atoi(char *str)
 	int	neg;
 	int	num;
 	int	counter;
-​
+
 	i = 0;
 	neg = 1;
 	num = 0;
@@ -40,20 +40,20 @@ int	ft_atoi(char *str)
 	num *= neg;
 	return (num);
 }
-​
+
 void	msg_received(int sig)
 {
 	if (sig == SIGUSR1)
 		ft_printf("Messaggio ricevuto\n");
 	return ;
 }
-​
+
 void	msg_tosend(int pid, char *msg)
 {
 	char	c;
 	int		b;
 	int		i;
-​
+
 	i = 0;
 	while (msg[i])
 	{
@@ -70,12 +70,12 @@ void	msg_tosend(int pid, char *msg)
 		i++;
 	}
 }
-​
+
 int	main(int argc, char **argv)
 {
 	int		pid;
 	char	*msg;
-​
+
 	if (argc < 3)
 		return (ft_printf("Error!\n"));
 	pid = ft_atoi(argv[1]);
