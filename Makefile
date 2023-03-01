@@ -6,7 +6,7 @@
 #    By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 17:32:30 by fprosper          #+#    #+#              #
-#    Updated: 2023/03/01 17:41:41 by fprosper         ###   ########.fr        #
+#    Updated: 2023/03/01 18:48:42 by fprosper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CLIENT = client.c
 OBJS_SERVER = $(SERVER:.c=.o)
 OBJS_CLIENT = $(CLIENT:.c=.o)
 FT_PRINTF = ./ft_printf/libftprintf.a
+LIBFT = ./libft/libft.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -31,15 +32,19 @@ server:		$(OBJS_SERVER)
 
 client:		$(OBJS_CLIENT)
 			make -C ./ft_printf
-			$(CC) $(CFLAGS) -o $(NAME2) $(OBJS_CLIENT) $(FT_PRINTF) $(CLIENT)
+			make -C ./libft
+			$(CC) $(CFLAGS) -o $(NAME2) $(OBJS_CLIENT) $(FT_PRINTF) $(LIBFT)
+			$(CLIENT)
 
 clean:
 			$(RM) $(OBJS_SERVER) $(OBJS_CLIENT)
 			make clean -C ./ft_printf
+			make clean -C ./libft
 
 fclean: 	clean
 			$(RM) $(NAME1) $(NAME2)
 			make fclean -C ./ft_printf
+			make fclean -C ./libft
 
 re: fclean all
 
