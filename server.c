@@ -5,44 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 17:24:53 by fprosper          #+#    #+#             */
-/*   Updated: 2023/02/28 15:50:30 by fprosper         ###   ########.fr       */
+/*   Created: 2023/03/01 17:37:06 by fprosper          #+#    #+#             */
+/*   Updated: 2023/03/01 17:48:17 by fprosper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	sig_handler(int sig, siginfo_t *info, void *a)
+void bin_handler()
 {
-	static unsigned char	c = 0;
-	static unsigned int		i = 0;
-	pid_t					send_pid;
-
-	send_pid = info->si_pid;
-	c |= (sig == SIGUSR1);
-	if (++i == 8)
-	{
-		i = 0;
-		write(1, &c, 1);
-		if (c == '\n')
-			kill(send_pid, SIGUSR1);
-		c = 0;
-	}
-	else
-		c = c << 1;
-	(void)a;
+    
 }
 
-int	main(void)
+int main(void)
 {
-	struct sigaction	ft_sig;
+    struct sigaction    sig_act;
 
-	ft_sig.sa_sigaction = sig_handler;
-	ft_sig.sa_flags = SA_SIGINFO;
-	ft_printf("PID: %d\nWaiting...\n", getpid());
-	sigaction(SIGUSR1, &ft_sig, 0);
-	sigaction(SIGUSR2, &ft_sig, 0);
-	while (1)
-		pause();
-	return (0);
+    sig_act.sa_flags = SA_SIGINFO;
+    sig_act.sa_sigaction = bin_handler;
+    ft_printf("PID, Process IDentifier: %d\n", getpid());
+    sigaction(SIGUSR1, &sig_act, NULL);
+	sigaction(SIGUSR2, &sig_act, NULL);
+    while (1)
+        pause();
+    return (0);
 }
