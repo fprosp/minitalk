@@ -55,17 +55,18 @@ void	msg_tosend(int pid, char *msg)
 	int		i;
 
 	i = 0;
-	while (msg[i])
+	while (msg[i]!= '\0')
 	{
-		b = 8;
+		b = 7;
 		c = msg[i];
-		while (b--)
+		while (b >= 0)
 		{
 			if (c >> b & 1)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
 			usleep(100);
+			b--;
 		}
 		i++;
 	}

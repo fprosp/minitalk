@@ -14,13 +14,14 @@
 
 void	sig_handler(int sig, siginfo_t *info, void *a)
 {
-	static unsigned char	c = 0;
-	static unsigned int		i = 0;
+	static unsigned char	c;
+	static unsigned int		i;
 	pid_t					send_pid;
 
 	send_pid = info->si_pid;
 	c |= (sig == SIGUSR1);
-	if (++i == 8)
+	i++;
+	if (i == 8)
 	{
 		i = 0;
 		write(1, &c, 1);
