@@ -6,7 +6,7 @@
 #    By: fprosper <fprosper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/01 17:32:30 by fprosper          #+#    #+#              #
-#    Updated: 2023/03/06 15:36:39 by fprosper         ###   ########.fr        #
+#    Updated: 2023/03/06 15:41:25 by fprosper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ SERVER = server.c
 CLIENT = client.c
 OBJS_SERVER = $(SERVER:.c=.o)
 OBJS_CLIENT = $(CLIENT:.c=.o)
-
 FT_PRINTF = ./ft_printf/libftprintf.a
 LIBFT = ./libft/libft.a
 
